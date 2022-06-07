@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
+import 'package:mypramuka/app/modules/latihan/views/detail_latihan.dart';
+import 'package:mypramuka/app/modules/latihan/views/latihan_view.dart';
+import 'package:mypramuka/app/modules/latihan/views/sejarah_kepramukaan.dart';
+import 'package:mypramuka/app/modules/materi/views/sandi_pramuka.dart';
+import 'package:mypramuka/app/modules/pengetahuan/views/pengetahuan_satu.dart';
+import 'package:mypramuka/app/modules/pengetahuan/views/pengetahuan_view.dart';
+import 'package:mypramuka/app/modules/profile/views/profile_view.dart';
+import 'package:mypramuka/app/routes/app_pages.dart';
+import '../../materi/views/materi_view.dart';
 import '../controllers/home_controller.dart';
+import 'Navbar.dart';
 
 class HomeView extends GetView<HomeController> {
+  const HomeView({Key? key}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavBar(),
       appBar: AppBar(
         centerTitle: false,
         title: RichText(
@@ -39,7 +50,7 @@ class HomeView extends GetView<HomeController> {
             ),
           ),
         ],
-        backgroundColor: Color(0xFF602924),
+        backgroundColor: Color(0xFF795548),
         elevation: 0,
       ),
       body: Stack(
@@ -49,7 +60,7 @@ class HomeView extends GetView<HomeController> {
             child: Container(
               height: 200,
               width: Get.width,
-              color: Color(0xFF602924),
+              color: Color(0xFF795548),
             ),
           ),
           Container(
@@ -67,8 +78,8 @@ class HomeView extends GetView<HomeController> {
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [
-                              Color(0xFF673400),
-                              Color(0xFF602924),
+                              Color(0xFF8D6E63),
+                              Color(0xFF795548),
                             ],
                           ),
                         ),
@@ -99,7 +110,7 @@ class HomeView extends GetView<HomeController> {
                             ),
                             SizedBox(height: 10),
                             Divider(
-                              color: Colors.black,
+                              color: Colors.white,
                             ),
                             SizedBox(height: 10),
                             RichText(
@@ -137,35 +148,147 @@ class HomeView extends GetView<HomeController> {
                         //body
                         Expanded(
                           child: ListView(
-                            padding: EdgeInsets.symmetric(horizontal: 25),
+                            padding: EdgeInsets.symmetric(horizontal: 30),
                             children: [
-                              SizedBox(height: 20),
+                              SizedBox(height: 40),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceAround,
                                 children: [
-                                  ItemKategori(
-                                    title: "Pengetahuan Pramuka",
-                                    icon: "assets/icon/bgg.png",
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                SizedBox(
+                                                    child:
+                                                        const SandiPramuka()),
+                                          ));
+                                    },
+                                    child: ItemKategori(
+                                      title: "Materi",
+                                      icon: "assets/icons/materi.png",
+                                    ),
                                   ),
                                   ItemKategori(
-                                    title: "Pedoman Pramuka",
-                                    icon: "assets/icon/pedoman.png",
+                                    title: "Anggota",
+                                    icon: "assets/icons/angotaa.png",
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                SizedBox(
+                                                    child:
+                                                        const SejarahKepramukaan()),
+                                          ));
+                                    },
+                                    child: ItemKategori(
+                                      title: "Latihan",
+                                      icon: "assets/icons/latihan.png",
+                                    ),
                                   ),
                                 ],
                               ),
                               SizedBox(height: 20),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceAround,
                                 children: [
-                                  ItemKategori(
-                                    title: "Latihan Pramuka",
-                                    icon: "assets/icon/latihan.png",
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                SizedBox(
+                                                    child:
+                                                        const PengetahuanView()),
+                                          ));
+                                    },
+                                    child: ItemKategori(
+                                      title: "Knowledge",
+                                      icon: "assets/icons/pengetahuan.png",
+                                    ),
                                   ),
                                   ItemKategori(
-                                    title: "Materi Pramuka",
-                                    icon: "assets/icon/materi.png",
+                                    title: "Kegiatan",
+                                    icon: "assets/icons/kegiatann.png",
+                                    // press: () {},
+                                  ),
+                                  ItemKategori(
+                                    title: "Pedoman",
+                                    icon: "assets/icons/pedoman.png",
+                                    // press: () {},
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 30),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Info Penting",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Lihat Semua",
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 20),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    ItemInfo(
+                                        image: "assets/images/image-1.png"),
+                                    ItemInfo(
+                                        image: "assets/images/image-2.png"),
+                                    ItemInfo(
+                                        image: "assets/images/image-1.png"),
+                                    ItemInfo(
+                                        image: "assets/images/image-2.png"),
+                                    ItemInfo(
+                                        image: "assets/images/image-1.png"),
+                                    ItemInfo(
+                                        image: "assets/images/image-2.png"),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 30),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Berita",
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Lihat Semua",
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -173,38 +296,49 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ),
                         //navigation
-                        Container(
-                          margin: EdgeInsets.only(bottom: 20),
-                          height: 100,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              top: BorderSide(
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ),
-                          // color: Colors.amber,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              ItemNav(
-                                icon: "home",
-                                status: true,
-                                title: "Beranda",
-                              ),
-                              ItemNav(
-                                icon: "bantuan",
-                                status: false,
-                                title: "Bantuan",
-                              ),
-                              ItemNav(
-                                icon: "akun",
-                                status: false,
-                                title: "Akun",
-                              ),
-                            ],
-                          ),
-                        ),
+                        // Container(
+                        //   // margin: EdgeInsets.only(bottom: 20),
+                        //   height: 100,
+                        //   decoration: BoxDecoration(
+                        //     border: Border(
+                        //       top: BorderSide(
+                        //         color: Colors.grey,
+                        //       ),
+                        //     ),
+                        //   ),
+                        //   // color: Colors.amber,
+                        //   // child: Row(
+                        //   //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //   //   children: [
+                        //   //     ItemNav(
+                        //   //       icon: "home",
+                        //   //       status: true,
+                        //   //       title: "Beranda",
+                        //   //     ),
+                        //   //     ItemNav(
+                        //   //       icon: "bantuan",
+                        //   //       status: false,
+                        //   //       title: "Bantuan",
+                        //   //     ),
+                        //   //     GestureDetector(
+                        //   //       onTap: () {
+                        //   //         Navigator.push(
+                        //   //             context,
+                        //   //             MaterialPageRoute(
+                        //   //               builder: (BuildContext context) =>
+                        //   //                   SizedBox(
+                        //   //                       child: const ProfileView()),
+                        //   //             ));
+                        //   //       },
+                        //   //       child: new ItemNav(
+                        //   //         icon: "akun",
+                        //   //         status: false,
+                        //   //         title: "Akun",
+                        //   //       ),
+                        //   //     ),
+                        //   //   ],
+                        //   // ),
+                        // ),
                       ],
                     ),
                   ),
@@ -218,15 +352,43 @@ class HomeView extends GetView<HomeController> {
   }
 }
 
+class ItemInfo extends StatelessWidget {
+  ItemInfo({
+    Key? key,
+    required this.image,
+  }) : super(key: key);
+
+  final String image;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(right: 20),
+      width: Get.width * 0.7,
+      height: 50,
+      decoration: BoxDecoration(
+        color: Colors.amber,
+        borderRadius: BorderRadius.circular(20),
+        image: DecorationImage(
+          image: AssetImage(image),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+}
+
 class ItemKategori extends StatelessWidget {
   ItemKategori({
     Key? key,
     required this.title,
     required this.icon,
+    // required this.press,
   }) : super(key: key);
 
   final String title;
   final String icon;
+  // final Function press;
 
   @override
   Widget build(BuildContext context) {
@@ -235,8 +397,8 @@ class ItemKategori extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: 50,
-          height: 50,
+          width: 40,
+          height: 40,
           child: Image.asset(
             icon,
             fit: BoxFit.cover,

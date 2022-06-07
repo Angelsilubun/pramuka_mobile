@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     //   getPages: AppPages.routes,
     // );
     return FutureBuilder(
-      future: Future.delayed(Duration(seconds: 5)),
+      future: Future.delayed(Duration(seconds: 3)),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SplashScreen();
